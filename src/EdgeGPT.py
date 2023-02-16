@@ -110,7 +110,8 @@ class Conversation:
     Conversation API
     """
 
-    def __init__(self, cookiePath: str = "") -> None:
+    def __init__(self, 
+                 Path: str = "") -> None:
         self.struct: dict = {
             "conversationId": None,
             "clientId": None,
@@ -119,7 +120,7 @@ class Conversation:
         }
         self.session = tls_client.Session(client_identifier="chrome_108")
         if cookiePath == "":
-            f = open(os.environ["COOKIE_FILE"], encoding="utf-8").read()
+            f = os.environ["COOKIE_FILE"]
         else:
             f = open(cookiePath, encoding="utf8").read()
         cookie_file = json.loads(f)
