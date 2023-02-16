@@ -119,7 +119,7 @@ class Conversation:
         }
         self.session = tls_client.Session(client_identifier="chrome_108")
         if cookiePath == "":
-            f = open(os.environ.get("COOKIE_FILE"), encoding="utf-8").read()
+            f = open(os.environ["COOKIE_FILE"], encoding="utf-8").read()
         else:
             f = open(cookiePath, encoding="utf8").read()
         cookie_file = json.loads(f)
