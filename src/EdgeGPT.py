@@ -111,7 +111,7 @@ class Conversation:
     """
 
     def __init__(self, 
-                 Path: str = "") -> None:
+                 cookiePath: str = "") -> None:
         self.struct: dict = {
             "conversationId": None,
             "clientId": None,
