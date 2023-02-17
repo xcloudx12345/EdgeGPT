@@ -233,7 +233,8 @@ class Chatbot:
     """
 
     def __init__(self, cookiePath: str = "") -> None:
-        self.chat_hub: ChatHub = ChatHub(Conversation(cookiePath))
+        self.cookiePath: str = cookiePath
+        self.chat_hub: ChatHub = ChatHub(Conversation(self.cookiePath))
 
     async def ask(self, prompt: str) -> dict:
         """
@@ -261,7 +262,7 @@ class Chatbot:
         Reset the conversation
         """
         await self.close()
-        self.chat_hub = ChatHub(Conversation())
+        self.chat_hub = ChatHub(Conversation(self.cookiePath))
 
 
 def get_input(prompt):
