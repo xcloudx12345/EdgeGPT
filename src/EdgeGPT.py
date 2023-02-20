@@ -79,6 +79,12 @@ class ChatHubRequest:
     def update(
         self,
         prompt: str,
+        options: list = [
+            "deepleo",
+            "enable_debug_commands",
+            "disable_emoji_spoken_text",
+            "enablemm",
+        ],
     ) -> None:
         """
         Updates request object
@@ -87,14 +93,7 @@ class ChatHubRequest:
             "arguments": [
                 {
                     "source": "cib",
-                    "optionsSets": [
-                        "nlu_direct_response_filter",
-                        "deepleo",
-                        "enable_debug_commands",
-                        "disable_emoji_spoken_text",
-                        "responsible_ai_policy_235",
-                        "enablemm",
-                    ],
+                    "optionsSets": options,
                     "isStartOfSession": self.invocation_id == 0,
                     "message": {
                         "author": "user",
@@ -243,6 +242,7 @@ class Chatbot:
         async for final, response in self.chat_hub.ask_stream(prompt=prompt):
             if final:
                 return response
+        self.chat_hub.wss.close()
 
     async def ask_stream(self, prompt: str) -> Generator[str, None, None]:
         """

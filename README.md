@@ -14,13 +14,10 @@
   <img alt="Python version" src="https://img.shields.io/badge/python-3.8+-blue.svg">
 </p>
 
-#
-
-> ### By using this library, you are breaking Microsoft TOS. Be careful of account suspension. I have tried my best to spoof headers and tls fingerprint
+---
 
 ## Table of Contents
 - [Edge GPT](#edge-gpt)
-- [](#)
   - [Table of Contents](#table-of-contents)
   - [Setup](#setup)
     - [Install package](#install-package)
@@ -42,8 +39,6 @@ python3 -m pip install EdgeGPT --upgrade
 ```
 
 ### Requirements
-We have a shared token for public use. If you have your own account with access, you can use that instead.
-
 - python 3.8+
 - Microsoft Edge (Required)
 - A Microsoft Account with early access to http://bing.com/chat (Required)
