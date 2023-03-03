@@ -132,7 +132,7 @@ class Conversation:
             cookie_file = cookies
         else:
             f = (
-                open(cookiePath, encoding="utf8").read()
+                open(os.environ["COOKIE_FILE"], encoding="utf-8").read()
                 if cookiePath
                 else open(os.environ["COOKIE_FILE"], encoding="utf-8").read()
             )
