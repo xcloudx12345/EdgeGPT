@@ -119,24 +119,26 @@ class Conversation:
     Conversation API
     """
 
-    def __init__(self, cookiePath: str = "", cookies: dict | None = None) -> None:
+    def __init__(self, cookiePath: str = "") -> None:
         self.struct: dict = {
             "conversationId": None,
             "clientId": None,
             "conversationSignature": None,
             "result": {"value": "Success", "message": None},
         }
-        self.session = requests.Session()
-        self.session.headers.update({"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36"})
+        self.session = tls_client.Session(client_identifier="chrome_108")
         if cookiePath == "":
             f = open(os.environ.get("COOKIE_FILE"), encoding="utf-8").read()
         else:
             f = open(cookiePath, encoding="utf8").read()
+        cookie_file = json.loads(f)
+        for cookie in cookie_file:
+            self.session.cookies.set(cookie["name"], cookie["value"])
         url = "https://edgeservices.bing.com/edgesvc/turing/conversation/create"
         # Send GET request
         response = self.session.get(
             url,
-            timeout=30,
+            timeout_seconds=30,
             headers=HEADERS,
             allow_redirects=True,
         )
