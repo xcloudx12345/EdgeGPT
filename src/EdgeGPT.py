@@ -128,13 +128,10 @@ class Conversation:
         }
         self.session = requests.Session()
         self.session.headers.update({"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36"})
-        if cookies is not None:
-            cookie_file = cookies
-        elif cookiePath =="":
-            f = open(os.environ["COOKIE_FILE"], encoding="utf-8").read()
-            cookie_file = json.loads(f)
-        for cookie in cookie_file:
-            self.session.cookies.set(cookie["name"], cookie["value"])
+        if cookiePath == "":
+            f = open(os.environ.get("COOKIE_FILE"), encoding="utf-8").read()
+        else:
+            f = open(cookiePath, encoding="utf8").read()
         url = "https://edgeservices.bing.com/edgesvc/turing/conversation/create"
         # Send GET request
         response = self.session.get(
