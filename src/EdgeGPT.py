@@ -134,7 +134,7 @@ class Conversation:
             f = (
                 open(cookiePath, encoding="utf8").read()
                 if cookiePath
-                else open(os.environ.get("COOKIE_FILE"), encoding="utf-8").read()
+                else open(os.environ["COOKIE_FILE"], encoding="utf-8").read()
             )
             cookie_file = json.loads(f)
         for cookie in cookie_file:
