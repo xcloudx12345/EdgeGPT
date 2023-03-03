@@ -130,12 +130,8 @@ class Conversation:
         self.session.headers.update({"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36"})
         if cookies is not None:
             cookie_file = cookies
-        else:
-            f = (
-                open(os.environ["COOKIE_FILE"], encoding="utf-8").read()
-                if cookiePath
-                else open(os.environ["COOKIE_FILE"], encoding="utf-8").read()
-            )
+        elif cookiePath =="":
+            f = open(os.environ["COOKIE_FILE"], encoding="utf-8").read()
             cookie_file = json.loads(f)
         for cookie in cookie_file:
             self.session.cookies.set(cookie["name"], cookie["value"])
